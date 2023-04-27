@@ -111,6 +111,9 @@ async function getCSSRules(
   // First loop inlines imports
   styleSheets.forEach((sheet) => {
     if ('cssRules' in sheet) {
+      if(sheet.href && sheet.href.includes('https://client.crisp.chat/static/stylesheets/client_default.css')){
+        return;
+      }
       try {
         toArray<CSSRule>(sheet.cssRules || []).forEach((item, index) => {
           if (item.type === CSSRule.IMPORT_RULE) {
